@@ -1,0 +1,61 @@
+{
+  "name": "wtclean-herdr",
+  "version": "0.1.0",
+  "description": "Find and clean up git worktrees whose pull requests have been merged. CLI, terminal UI and herdr plugin.",
+  "keywords": [
+    "bun",
+    "cleanup",
+    "cli",
+    "git",
+    "github",
+    "herdr",
+    "pull-request",
+    "tui",
+    "worktree"
+  ],
+  "homepage": "https://github.com/AdamSiekierski/wtclean-herdr#readme",
+  "bugs": "https://github.com/AdamSiekierski/wtclean-herdr/issues",
+  "license": "MIT",
+  "author": "Adam Siekierski",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdamSiekierski/wtclean-herdr.git"
+  },
+  "bin": {
+    "wtclean": "bin/wtclean"
+  },
+  "files": [
+    "bin",
+    "src",
+    "!src/**/*.test.ts",
+    "!src/**/*.test.tsx",
+    "herdr-plugin.toml"
+  ],
+  "type": "module",
+  "scripts": {
+    "start": "bun src/cli.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint --deny-warnings",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "test": "bun test",
+    "check": "bun run typecheck && bun run lint && bun run format:check && bun test",
+    "prepublishOnly": "bun run check"
+  },
+  "dependencies": {
+    "commander": "^15.0.0",
+    "ink": "^8.0.0",
+    "react": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.4",
+    "@types/react": "^19.3.0",
+    "ink-testing-library": "^4.0.0",
+    "oxfmt": "^0.76.0",
+    "oxlint": "^1.91.0",
+    "typescript": "^7.0.2"
+  },
+  "engines": {
+    "bun": ">=1.2"
+  }
+}

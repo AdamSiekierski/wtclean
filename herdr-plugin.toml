@@ -1,0 +1,52 @@
+id = "adamsiekierski.wtclean"
+name = "wtclean"
+version = "0.1.0"
+# 0.9.0 resolves a pane's relative command (`bin/wtclean`) against the plugin root and
+# supports per-entry `[[build]]` commands.
+min_herdr_version = "0.9.0"
+platforms = ["macos", "linux"]
+description = "Find git worktrees whose GitHub pull request was merged and clean them up, all at once or one by one."
+
+# Runs on `herdr plugin install` (skipped by `herdr plugin link`). Bun runs the TypeScript
+# sources directly, so installing the runtime dependencies is the whole build.
+[[build]]
+command = ["bun", "install", "--production", "--frozen-lockfile"]
+
+# Placement: overlay. wtclean is a short, modal task (scan, pick, clean, quit), so it floats
+# above whatever you were doing instead of reshaping a split layout or leaving a tab behind,
+# and `q` drops you straight back where you were. It also keeps the pane out of the
+# workspaces it may close: cleaning a worktree that is open in herdr removes its workspace.
+[[panes]]
+id = "tui"
+title = "wtclean"
+placement = "overlay"
+command = ["bin/wtclean", "tui", "--global"]
+
+# Same, but also lists worktrees whose PR is open, draft or closed (only merged ones are
+# cleanable).
+[[panes]]
+id = "tui-all"
+title = "wtclean (all PRs)"
+placement = "overlay"
+command = ["bin/wtclean", "tui", "--global", "--all"]
+
+# Actions are what you bind to a key (`<plugin id>.<action id>`, e.g. adamsiekierski.wtclean.open).
+[[actions]]
+id = "open"
+title = "wtclean: clean up merged worktrees"
+contexts = ["global", "workspace"]
+command = [
+  "sh",
+  "-c",
+  "exec \"${HERDR_BIN_PATH:-herdr}\" plugin pane open --plugin adamsiekierski.wtclean --entrypoint tui",
+]
+
+[[actions]]
+id = "open-all"
+title = "wtclean: show worktrees with any PR state"
+contexts = ["global", "workspace"]
+command = [
+  "sh",
+  "-c",
+  "exec \"${HERDR_BIN_PATH:-herdr}\" plugin pane open --plugin adamsiekierski.wtclean --entrypoint tui-all",
+]
