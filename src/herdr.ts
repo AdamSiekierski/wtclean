@@ -55,3 +55,11 @@ export async function removeHerdrWorktree(workspaceId: string, force: boolean): 
     ...(force ? ["--force"] : []),
   ]);
 }
+
+/**
+ * Focuses the herdr workspace for a worktree, opening one first if needed. herdr opens
+ * worktrees from the repo's parent workspace, so that one is opened too when missing.
+ */
+export async function openInHerdr(repoRoot: string, path: string): Promise<void> {
+  await run("herdr", ["worktree", "open", "--cwd", repoRoot, "--path", path, "--focus"]);
+}

@@ -46,17 +46,18 @@ Status: **shipped** (in the code on `main`), **planned** (agreed, not built yet)
 
 ## TUI
 
-| ID  | Feature                                    | CLI surface                            | Status  | Notes                           |
-| --- | ------------------------------------------ | -------------------------------------- | ------- | ------------------------------- |
-| T1  | Interactive list of worktrees and PR state | `wtclean tui`; bare `wtclean` in a TTY | shipped | ink                             |
-| T2  | Move                                       | `↑`/`↓`, `k`/`j`                       | shipped |                                 |
-| T3  | Select one / all or none                   | `space` / `a`                          | shipped | Only merged rows are selectable |
-| T4  | Clean the selection, with confirmation     | `enter` / `d`                          | shipped |                                 |
-| T5  | Toggle force (include dirty worktrees)     | `f`                                    | shipped |                                 |
-| T6  | Open the PR in the browser                 | `o`                                    | shipped |                                 |
-| T7  | Rescan                                     | `r`                                    | shipped |                                 |
-| T8  | Quit                                       | `q` / `esc`                            | shipped |                                 |
-| T9  | Scope and auth options as in the CLI       | `-g`, `-r`, `-a`, `--token`            | shipped |                                 |
+| ID  | Feature                                                                    | CLI surface                            | Status  | Notes                                            |
+| --- | -------------------------------------------------------------------------- | -------------------------------------- | ------- | ------------------------------------------------ |
+| T1  | Interactive list of worktrees and PR state                                 | `wtclean tui`; bare `wtclean` in a TTY | shipped | ink                                              |
+| T2  | Move                                                                       | `↑`/`↓`, `k`/`j`                       | shipped |                                                  |
+| T3  | Select one / all or none                                                   | `space` / `a`                          | shipped | Only merged rows are selectable                  |
+| T4  | Clean the selection, with confirmation                                     | `enter` / `d`                          | shipped |                                                  |
+| T5  | Toggle force (include dirty worktrees)                                     | `f`                                    | shipped |                                                  |
+| T6  | Open the PR in the browser                                                 | `o`                                    | shipped |                                                  |
+| T10 | Jump to the worktree in herdr (focus its workspace, opening one if needed) | `h`                                    | shipped | Inside herdr only; `herdr worktree open --focus` |
+| T7  | Rescan                                                                     | `r`                                    | shipped |                                                  |
+| T8  | Quit                                                                       | `q` / `esc`                            | shipped |                                                  |
+| T9  | Scope and auth options as in the CLI                                       | `-g`, `-r`, `-a`, `--token`            | shipped |                                                  |
 
 ## herdr plugin
 

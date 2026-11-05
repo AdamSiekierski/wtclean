@@ -31,6 +31,7 @@ export function Footer({ selected, force, keepBranch, notice }: Props) {
         <Key k="enter/d" label="clean" />
         <Key k="f" label="force" />
         <Key k="o" label="open PR" />
+        <Key k="h" label="open in herdr" />
         <Key k="r" label="rescan" />
         <Key k="q" label="quit" />
       </Box>
@@ -47,7 +48,7 @@ export function Footer({ selected, force, keepBranch, notice }: Props) {
         <Text color="yellow">*</Text>
         <Text dimColor>{" dirty  "}</Text>
         <Text color="cyan">H</Text>
-        <Text dimColor> open in herdr</Text>
+        <Text dimColor> has a herdr workspace</Text>
       </Text>
     </Box>
   );

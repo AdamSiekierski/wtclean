@@ -137,16 +137,17 @@ In a terminal, `clean` asks for confirmation unless `--yes` is given.
 
 ### TUI keys
 
-| Key              | Action                                 |
-| ---------------- | -------------------------------------- |
-| `↑`/`↓`, `k`/`j` | Move                                   |
-| `space`          | Select / unselect                      |
-| `a`              | Select all / none                      |
-| `enter`, `d`     | Clean the selection (asks to confirm)  |
-| `f`              | Toggle force (include dirty worktrees) |
-| `o`              | Open the PR in your browser            |
-| `r`              | Rescan                                 |
-| `q`, `esc`       | Quit                                   |
+| Key              | Action                                                      |
+| ---------------- | ----------------------------------------------------------- |
+| `↑`/`↓`, `k`/`j` | Move                                                        |
+| `space`          | Select / unselect                                           |
+| `a`              | Select all / none                                           |
+| `enter`, `d`     | Clean the selection (asks to confirm)                       |
+| `f`              | Toggle force (include dirty worktrees)                      |
+| `o`              | Open the PR in your browser                                 |
+| `h`              | Jump to the worktree in herdr (opens a workspace if needed) |
+| `r`              | Rescan                                                      |
+| `q`, `esc`       | Quit                                                        |
 
 ## Authentication
 
