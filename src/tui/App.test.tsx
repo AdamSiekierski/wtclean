@@ -56,7 +56,7 @@ mock.module("../clean.ts", () => ({
 }));
 const { App } = await import("./App.tsx");
 
-const scanOptions: ScanOptions = { global: false, allStates: true, repos: [], cwd: "/repos/app" };
+const scanOptions: ScanOptions = { here: true, allStates: true, repos: [], cwd: "/repos/app" };
 const tick = () => new Promise((resolve) => setTimeout(resolve, 30));
 
 test("lists worktrees, selects only merged rows and cleans the selection", async () => {

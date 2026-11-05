@@ -62,10 +62,10 @@ async function resolveRepoRoots(
   workspaces: HerdrWorkspace[],
 ): Promise<string[]> {
   if (opts.repos.length > 0) return Promise.all(opts.repos.map(repoRootOf));
-  if (!opts.global) return [await repoRootOf(opts.cwd)];
+  if (opts.here) return [await repoRootOf(opts.cwd)];
   return [
     ...workspaces.map((w) => realpath(w.repoRoot)),
-    ...(await discoverableRoots(herdrWorktreeDirs())),
+    ...(await discoverableRoots([opts.cwd, ...herdrWorktreeDirs()])),
   ];
 }
 

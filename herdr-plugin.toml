@@ -20,7 +20,7 @@ command = ["bun", "install", "--production", "--frozen-lockfile"]
 id = "tui"
 title = "wtclean"
 placement = "overlay"
-command = ["bin/wtclean", "tui", "--global"]
+command = ["bin/wtclean", "tui"]
 
 # Same, but also lists worktrees whose PR is open, draft or closed (only merged ones are
 # cleanable).
@@ -28,7 +28,7 @@ command = ["bin/wtclean", "tui", "--global"]
 id = "tui-all"
 title = "wtclean (all PRs)"
 placement = "overlay"
-command = ["bin/wtclean", "tui", "--global", "--all"]
+command = ["bin/wtclean", "tui", "--all"]
 
 # Actions are what you bind to a key (`<plugin id>.<action id>`, e.g. adamsiekierski.wtclean.open).
 [[actions]]
