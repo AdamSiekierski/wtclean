@@ -78,15 +78,16 @@ Status: **shipped** (in the code on `main`), **planned** (agreed, not built yet)
 
 ## Tooling / guards
 
-| ID  | Feature                                       | CLI surface                | Status  | Notes                            |
-| --- | --------------------------------------------- | -------------------------- | ------- | -------------------------------- |
-| G1  | Type checking (strict TypeScript)             | `bun run typecheck`        | shipped |                                  |
-| G2  | Lint with oxlint, warnings fail               | `bun run lint`             | shipped | `.oxlintrc.json`                 |
-| G3  | Format with oxfmt                             | `bun run format[:check]`   | shipped | `.oxfmtrc.json`, print width 100 |
-| G4  | Tests with the Bun test runner                | `bun test`                 | shipped |                                  |
-| G5  | One command for all guards                    | `bun run check`            | shipped | Also runs before `npm publish`   |
-| G6  | CI on push / PR to `main`                     | `.github/workflows/ci.yml` | shipped |                                  |
-| G7  | Dependabot for npm and GitHub Actions, weekly | `.github/dependabot.yml`   | shipped |                                  |
+| ID  | Feature                                       | CLI surface                     | Status  | Notes                                                                            |
+| --- | --------------------------------------------- | ------------------------------- | ------- | -------------------------------------------------------------------------------- |
+| G1  | Type checking (strict TypeScript)             | `bun run typecheck`             | shipped |                                                                                  |
+| G2  | Lint with oxlint, warnings fail               | `bun run lint`                  | shipped | `.oxlintrc.json`                                                                 |
+| G3  | Format with oxfmt                             | `bun run format[:check]`        | shipped | `.oxfmtrc.json`, print width 100                                                 |
+| G4  | Tests with the Bun test runner                | `bun test`                      | shipped |                                                                                  |
+| G5  | One command for all guards                    | `bun run check`                 | shipped | Also runs before `npm publish`                                                   |
+| G6  | CI on push / PR to `main`                     | `.github/workflows/ci.yml`      | shipped |                                                                                  |
+| G7  | Dependabot for npm and GitHub Actions, weekly | `.github/dependabot.yml`        | shipped |                                                                                  |
+| G8  | Publish to npm from a GitHub release          | `.github/workflows/release.yml` | shipped | Tag `vX.Y.Z` must match `package.json`; prerelease → `next` dist-tag; provenance |
 
 ## Planned / ideas
 
