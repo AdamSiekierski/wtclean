@@ -2,6 +2,7 @@ import { Box, Text, useAnimation, useApp, useInput, useWindowSize } from "ink";
 import { useState } from "react";
 import { cleanAll } from "../clean.ts";
 import { pluralize, tildify } from "../format.ts";
+import { inHerdr, openInHerdr } from "../herdr.ts";
 import { isMerged } from "../scan.ts";
 import type { MergedWorktree, PrWorktree, ScanOptions } from "../types.ts";
 import { Footer } from "./Footer.tsx";
@@ -85,6 +86,18 @@ export function App({ scanOptions, force: initialForce, keepBranch }: AppProps) 
       return setCursor((c) => Math.min(worktrees.length - 1, c + 1));
     if (!current) return;
     if (input === "o") return openUrl(current.pr.url);
+    if (input === "h") {
+      if (!inHerdr()) return setNotice("Not running inside herdr.");
+      if (statuses.get(current.path)?.status === "removed")
+        return setNotice("That worktree was removed.");
+      const target = current;
+      openInHerdr(target.repo.root, target.path).then(
+        () => setNotice(`Opened ${target.branch} in herdr.`),
+        (error: unknown) =>
+          setNotice(`herdr: ${error instanceof Error ? error.message : String(error)}`),
+      );
+      return;
+    }
     if (input === " ") {
       if (!cleanable(current))
         return setNotice(
