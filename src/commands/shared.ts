@@ -4,7 +4,7 @@ import type { ScanOptions, ScanResult } from "../types.ts";
 import { colorEnabled, paint } from "../format.ts";
 
 export interface ScopeFlags {
-  global?: boolean;
+  here?: boolean;
   repo?: string[];
   all?: boolean;
   token?: string;
@@ -13,7 +13,7 @@ export interface ScopeFlags {
 /** Add the scope/auth options shared by every command. */
 export function addScopeOptions(cmd: Command): Command {
   return cmd
-    .option("-g, --global", "scan every repo herdr knows about")
+    .option("--here", "only scan the repo containing the current directory")
     .option("-r, --repo <path...>", "scan these repos (any path inside a repo; repeatable)")
     .option("-a, --all", "include worktrees whose PR is open, draft or closed, not only merged")
     .option(
@@ -24,7 +24,7 @@ export function addScopeOptions(cmd: Command): Command {
 
 export function toScanOptions(flags: ScopeFlags): ScanOptions {
   return {
-    global: flags.global ?? false,
+    here: flags.here ?? false,
     allStates: flags.all ?? false,
     token: flags.token,
     repos: flags.repo ?? [],
@@ -63,7 +63,7 @@ export function printWarnings(warnings: string[]): void {
 }
 
 export function scopeDescription(opts: ScanOptions): string {
-  if (opts.global) return "any herdr repo";
   if (opts.repos.length) return opts.repos.join(", ");
-  return "this repo";
+  if (opts.here) return "this repo";
+  return "any local repo";
 }

@@ -44,8 +44,8 @@ export interface MergedWorktree extends PrWorktree {
 }
 
 export interface ScanOptions {
-  /** Scan every repo herdr knows about instead of just cwd (CLI: --global / -g). */
-  global: boolean;
+  /** Only scan the repo containing cwd (CLI: --here). Default scans every repo herdr knows plus cwd's. */
+  here: boolean;
   /** Include PRs in any state, not only merged (CLI: --all / -a). */
   allStates: boolean;
   /** GitHub token. When undefined, resolved via `gh auth token`. */

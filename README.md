@@ -8,14 +8,14 @@ worktree whose branch's GitHub pull request has been merged and removes it, toge
 local branch. Clean them all at once, or pick them one by one in a terminal UI. It also ships
 as a [herdr](https://herdr.dev) plugin, so one key sweeps every repo herdr knows about.
 
-<!-- TODO: demo GIF of `wtclean tui --global` (record with vhs, ~10s: scan, select, clean). -->
+<!-- TODO: demo GIF of `wtclean` (record with vhs, ~10s: scan, select, clean). -->
 
 ## Features
 
 - **Finds merged worktrees**: lists linked worktrees, looks up the PR for each branch on GitHub,
   and keeps the merged ones.
-- **One repo or all of them**: the current repo by default, specific repos with `--repo`, or
-  every repo herdr knows about with `--global`.
+- **All your repos at once**: by default every repo herdr knows about plus the one you are in;
+  narrow it with `--here` (current repo) or `--repo <path...>`.
 - **See everything**: `--all` also shows worktrees whose PR is open, draft or closed, with the
   state, so you can see what is still in flight.
 - **Bulk or one by one**: `wtclean clean` for all of them, `wtclean tui` to pick.
@@ -32,7 +32,7 @@ as a [herdr](https://herdr.dev) plugin, so one key sweeps every repo herdr knows
 - git
 - The [GitHub CLI](https://cli.github.com) logged in (`gh auth login`), or a GitHub personal
   access token (see [Authentication](#authentication))
-- [herdr](https://herdr.dev) 0.9.0 or newer, optional: needed for `--global` and the plugin
+- [herdr](https://herdr.dev) 0.9.0 or newer, optional: used to discover your repos and for the plugin
 
 ## Install
 
@@ -61,13 +61,12 @@ bun link            # puts `wtclean` on your PATH
 herdr plugin install AdamSiekierski/wtclean-herdr
 ```
 
-The plugin adds two actions, each opening the wtclean TUI in an overlay over every repo herdr
-knows about (`--global`):
+The plugin adds two actions, each opening the wtclean TUI in an overlay over all your repos:
 
-| Action id                         | Opens                                                   |
-| --------------------------------- | ------------------------------------------------------- |
-| `adamsiekierski.wtclean.open`     | Worktrees with a merged PR (`wtclean tui --global`)     |
-| `adamsiekierski.wtclean.open-all` | Worktrees with a PR in any state (`... --global --all`) |
+| Action id                         | Opens                                                  |
+| --------------------------------- | ------------------------------------------------------ |
+| `adamsiekierski.wtclean.open`     | Worktrees with a merged PR (`wtclean tui`)             |
+| `adamsiekierski.wtclean.open-all` | Worktrees with a PR in any state (`wtclean tui --all`) |
 
 Run one from the command line:
 
@@ -90,33 +89,33 @@ description = "clean merged worktrees"
 ## Usage
 
 ```sh
-wtclean                 # in a terminal: opens the TUI for the current repo
-wtclean list            # merged worktrees of the current repo (alias: ls)
+wtclean                 # in a terminal: opens the TUI over all your repos
+wtclean list            # merged worktrees across all your repos (alias: ls)
 wtclean list --all      # ...plus worktrees whose PR is open, draft or closed
 wtclean list --json     # machine-readable output
-wtclean list -g         # every repo herdr knows about
+wtclean list --here     # only the repo you are in
 wtclean list -r ~/code/api ~/code/web   # specific repos (any path inside a repo works)
 
-wtclean clean           # remove all merged worktrees of the current repo (asks first)
+wtclean clean           # remove all merged worktrees (asks first)
 wtclean clean -n        # dry run: show what would be removed
-wtclean clean -g -y     # every herdr repo, no confirmation
+wtclean clean --here -y # current repo only, no confirmation
 wtclean clean --force   # also remove worktrees with uncommitted changes
 wtclean clean --keep-branch   # remove worktrees, keep their local branches
 
 wtclean tui             # pick worktrees to clean interactively
-wtclean tui -g --all    # every herdr repo, every PR state
+wtclean tui --all       # every PR state
 ```
 
 ### Options
 
 Shared by every command:
 
-| Option                 | Description                                                                                      |
-| ---------------------- | ------------------------------------------------------------------------------------------------ |
-| `-g, --global`         | Scan every repo herdr knows: repos of herdr workspaces and repos owning `~/.herdr/worktrees/*/*` |
-| `-r, --repo <path...>` | Scan these repos instead of the current one                                                      |
-| `-a, --all`            | Also show worktrees whose PR is open, draft or closed (only merged ones can be cleaned)          |
-| `--token <pat>`        | GitHub token to use (see [Authentication](#authentication))                                      |
+| Option                 | Description                                                                             |
+| ---------------------- | --------------------------------------------------------------------------------------- |
+| `--here`               | Only scan the repo containing the current directory                                     |
+| `-r, --repo <path...>` | Scan only these repos (any path inside a repo)                                          |
+| `-a, --all`            | Also show worktrees whose PR is open, draft or closed (only merged ones can be cleaned) |
+| `--token <pat>`        | GitHub token to use (see [Authentication](#authentication))                             |
 
 `list`:
 
@@ -180,8 +179,9 @@ wtclean deletes things, so it is careful about what:
 
 ## How it works
 
-1. **Discover repos**: the current repo, the `--repo` paths, or with `--global` every repo with
-   a herdr workspace plus every repo owning a checkout under `~/.herdr/worktrees/*/*`.
+1. **Discover repos**: by default every repo with a herdr workspace, every repo owning a checkout
+   under `~/.herdr/worktrees/*/*`, and the repo you are in (if any). `--here` limits it to the
+   current repo, `--repo` to the given paths.
 2. **List worktrees**: `git worktree list --porcelain`, dropping the main checkout and detached
    HEADs, and noting which ones have uncommitted changes.
 3. **Look up PRs**: for each branch, the most recent PR with that head branch on the repo's
