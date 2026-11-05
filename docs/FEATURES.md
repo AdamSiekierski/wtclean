@@ -10,16 +10,16 @@ Status: **shipped** (in the code on `main`), **planned** (agreed, not built yet)
 
 ## Discovery
 
-| ID  | Feature                                                                                        | CLI surface            | Status  | Notes                           |
-| --- | ---------------------------------------------------------------------------------------------- | ---------------------- | ------- | ------------------------------- |
-| D1  | Scan the repo containing the current directory                                                 | default                | shipped |                                 |
-| D2  | Scan explicit repos (any path inside a repo)                                                   | `-r, --repo <path...>` | shipped | Overrides the current directory |
-| D3  | Scan every repo herdr knows: repos of herdr workspaces + repos owning `~/.herdr/worktrees/*/*` | `-g, --global`         | shipped |                                 |
-| D4  | List linked worktrees only; the main checkout is never a candidate                             | all commands           | shipped | `git worktree list --porcelain` |
-| D5  | Skip detached-HEAD worktrees (no branch, no PR)                                                | all commands           | shipped |                                 |
-| D6  | Detect uncommitted changes (tracked or untracked) per worktree                                 | all commands           | shipped | Drives the dirty guard (C3)     |
-| D7  | Detect which herdr workspace has a worktree open                                               | all commands           | shipped | Drives herdr-aware removal (C5) |
-| D8  | Per-repo problems become warnings; the rest of the scan continues                              | all commands           | shipped |                                 |
+| ID  | Feature                                                                                         | CLI surface            | Status  | Notes                           |
+| --- | ----------------------------------------------------------------------------------------------- | ---------------------- | ------- | ------------------------------- |
+| D1  | Scan only the repo containing the current directory                                             | `--here`               | shipped |                                 |
+| D2  | Scan explicit repos (any path inside a repo)                                                    | `-r, --repo <path...>` | shipped | Overrides the current directory |
+| D3  | Scan every repo herdr knows (workspaces + owners of `~/.herdr/worktrees/*/*`) plus the cwd repo | default                | shipped |                                 |
+| D4  | List linked worktrees only; the main checkout is never a candidate                              | all commands           | shipped | `git worktree list --porcelain` |
+| D5  | Skip detached-HEAD worktrees (no branch, no PR)                                                 | all commands           | shipped |                                 |
+| D6  | Detect uncommitted changes (tracked or untracked) per worktree                                  | all commands           | shipped | Drives the dirty guard (C3)     |
+| D7  | Detect which herdr workspace has a worktree open                                                | all commands           | shipped | Drives herdr-aware removal (C5) |
+| D8  | Per-repo problems become warnings; the rest of the scan continues                               | all commands           | shipped |                                 |
 
 ## PR status
 
@@ -63,8 +63,8 @@ Status: **shipped** (in the code on `main`), **planned** (agreed, not built yet)
 | ID  | Feature                                                          | CLI surface                                         | Status  | Notes                                               |
 | --- | ---------------------------------------------------------------- | --------------------------------------------------- | ------- | --------------------------------------------------- |
 | H1  | Installable plugin manifest (`herdr-plugin.toml`, herdr ≥ 0.9.0) | `herdr plugin install AdamSiekierski/wtclean-herdr` | shipped | Build: `bun install --production --frozen-lockfile` |
-| H2  | Pane `tui`: TUI over every herdr repo, overlay placement         | `wtclean tui --global`                              | shipped |                                                     |
-| H3  | Pane `tui-all`: same, every PR state                             | `wtclean tui --global --all`                        | shipped |                                                     |
+| H2  | Pane `tui`: TUI over every herdr repo, overlay placement         | `wtclean tui`                                       | shipped |                                                     |
+| H3  | Pane `tui-all`: same, every PR state                             | `wtclean tui --all`                                 | shipped |                                                     |
 | H4  | Actions `open` / `open-all`, bindable to a key                   | `adamsiekierski.wtclean.open`, `.open-all`          | shipped | Contexts: global, workspace                         |
 
 ## Auth
