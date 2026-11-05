@@ -1,4 +1,5 @@
 import { expect, mock, test } from "bun:test";
+import { stripVTControlCharacters } from "node:util";
 import { render } from "ink-testing-library";
 import type {
   CleanOptions,
@@ -59,12 +60,16 @@ const scanOptions: ScanOptions = { global: false, allStates: true, repos: [], cw
 const tick = () => new Promise((resolve) => setTimeout(resolve, 30));
 
 test("lists worktrees, selects only merged rows and cleans the selection", async () => {
-  const { lastFrame, stdin, unmount } = render(
-    <App scanOptions={scanOptions} force={false} keepBranch={false} />,
-  );
+  const {
+    lastFrame: rawFrame,
+    stdin,
+    unmount,
+  } = render(<App scanOptions={scanOptions} force={false} keepBranch={false} />);
   await tick();
 
-  const frame = lastFrame() ?? "";
+  // Strip ANSI so assertions hold when the environment forces color (FORCE_COLOR, TTY).
+  const lastFrame = () => stripVTControlCharacters(rawFrame() ?? "");
+  const frame = lastFrame();
   expect(frame).toContain("feat-done");
   expect(frame).toContain("#7");
   expect(frame).toContain("merged");
