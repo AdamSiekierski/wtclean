@@ -33,6 +33,21 @@ herdr plugin unlink adamsiekierski.wtclean   # when done
 
 Keep pull requests focused; one change per PR is easiest to review.
 
+## Releasing
+
+Releases publish to npm automatically from GitHub releases
+([`.github/workflows/release.yml`](.github/workflows/release.yml)):
+
+1. Bump `version` in `package.json` and `herdr-plugin.toml`, move the _Unreleased_ entries in
+   `CHANGELOG.md` under the new version, and merge to `main`.
+2. Create a GitHub release with tag `vX.Y.Z` (matching `package.json`), e.g.
+   `gh release create v0.2.0 --generate-notes`. Mark it as a pre-release to publish under the
+   `next` dist-tag.
+3. The workflow runs `bun run check` and `npm publish --provenance`.
+
+Auth: configure [npm trusted publishing](https://docs.npmjs.com/trusted-publishers) for this
+repo (workflow `release.yml`, environment `npm`), or add an `NPM_TOKEN` repository secret.
+
 ## Reporting bugs
 
 Open an issue with the bug report template. Include `wtclean --version`, `bun --version`,

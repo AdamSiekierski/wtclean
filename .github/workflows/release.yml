@@ -1,0 +1,46 @@
+name: Release
+
+# Publishing a GitHub release (tag `vX.Y.Z`) publishes that version to npm.
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write # npm trusted publishing (OIDC) + provenance
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    environment: npm
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      # npm >= 11.5 is needed for trusted publishing; Node 24 ships it.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+
+      - name: Check tag matches package.json version
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          version="$(node -p 'require("./package.json").version')"
+          if [ "$tag" != "$version" ]; then
+            echo "::error::Release tag v$tag does not match package.json version $version"
+            exit 1
+          fi
+
+      - run: bun install --frozen-lockfile
+      - run: bun run check
+
+      # Uses trusted publishing when configured on npmjs.com; otherwise falls back to the NPM_TOKEN secret.
+      - name: Publish
+        run: npm publish --provenance --access public ${{ github.event.release.prerelease && '--tag next' || '' }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
