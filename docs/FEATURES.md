@@ -61,12 +61,12 @@ Status: **shipped** (in the code on `main`), **planned** (agreed, not built yet)
 
 ## herdr plugin
 
-| ID  | Feature                                                          | CLI surface                                         | Status  | Notes                                               |
-| --- | ---------------------------------------------------------------- | --------------------------------------------------- | ------- | --------------------------------------------------- |
-| H1  | Installable plugin manifest (`herdr-plugin.toml`, herdr ≥ 0.9.0) | `herdr plugin install AdamSiekierski/wtclean-herdr` | shipped | Build: `bun install --production --frozen-lockfile` |
-| H2  | Pane `tui`: TUI over every herdr repo, overlay placement         | `wtclean tui`                                       | shipped |                                                     |
-| H3  | Pane `tui-all`: same, every PR state                             | `wtclean tui --all`                                 | shipped |                                                     |
-| H4  | Actions `open` / `open-all`, bindable to a key                   | `adamsiekierski.wtclean.open`, `.open-all`          | shipped | Contexts: global, workspace                         |
+| ID  | Feature                                                          | CLI surface                                   | Status  | Notes                                               |
+| --- | ---------------------------------------------------------------- | --------------------------------------------- | ------- | --------------------------------------------------- |
+| H1  | Installable plugin manifest (`herdr-plugin.toml`, herdr ≥ 0.9.0) | `herdr plugin install AdamSiekierski/wtclean` | shipped | Build: `bun install --production --frozen-lockfile` |
+| H2  | Pane `tui`: TUI over every herdr repo, overlay placement         | `wtclean tui`                                 | shipped |                                                     |
+| H3  | Pane `tui-all`: same, every PR state                             | `wtclean tui --all`                           | shipped |                                                     |
+| H4  | Actions `open` / `open-all`, bindable to a key                   | `adamsiekierski.wtclean.open`, `.open-all`    | shipped | Contexts: global, workspace                         |
 
 ## Auth
 

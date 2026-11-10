@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Renamed the repository and npm package from `wtclean-herdr` to `wtclean`.
+
 ## [0.1.0] - Unreleased
 
 ### Added
@@ -24,5 +28,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `herdr worktree remove`.
 - herdr plugin manifest with `open` and `open-all` actions.
 
-[Unreleased]: https://github.com/AdamSiekierski/wtclean-herdr/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/AdamSiekierski/wtclean-herdr/releases/tag/v0.1.0
+[Unreleased]: https://github.com/AdamSiekierski/wtclean/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/AdamSiekierski/wtclean/releases/tag/v0.1.0

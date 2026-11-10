@@ -1,6 +1,6 @@
 # wtclean
 
-[![CI](https://github.com/AdamSiekierski/wtclean-herdr/actions/workflows/ci.yml/badge.svg)](https://github.com/AdamSiekierski/wtclean-herdr/actions/workflows/ci.yml)
+[![CI](https://github.com/AdamSiekierski/wtclean/actions/workflows/ci.yml/badge.svg)](https://github.com/AdamSiekierski/wtclean/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 **Your PR got merged. Its worktree didn't go anywhere.** `wtclean` finds every git linked
@@ -37,20 +37,20 @@ as a [herdr](https://herdr.dev) plugin, so one key sweeps every repo herdr knows
 ## Install
 
 ```sh
-bun add -g wtclean-herdr   # installs the `wtclean` command
+bun add -g wtclean   # installs the `wtclean` command
 ```
 
 Or run it without installing:
 
 ```sh
-bunx wtclean-herdr list
+bunx wtclean list
 ```
 
 From source:
 
 ```sh
-git clone https://github.com/AdamSiekierski/wtclean-herdr.git
-cd wtclean-herdr
+git clone https://github.com/AdamSiekierski/wtclean.git
+cd wtclean
 bun install
 bun link            # puts `wtclean` on your PATH
 ```
@@ -58,7 +58,7 @@ bun link            # puts `wtclean` on your PATH
 ## herdr plugin
 
 ```sh
-herdr plugin install AdamSiekierski/wtclean-herdr
+herdr plugin install AdamSiekierski/wtclean
 ```
 
 The plugin adds two actions, each opening the wtclean TUI in an overlay over all your repos:

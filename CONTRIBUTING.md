@@ -8,8 +8,8 @@ You need [Bun](https://bun.sh) 1.2+, git, and optionally the GitHub CLI and
 [herdr](https://herdr.dev).
 
 ```sh
-git clone https://github.com/AdamSiekierski/wtclean-herdr.git
-cd wtclean-herdr
+git clone https://github.com/AdamSiekierski/wtclean.git
+cd wtclean
 bun install
 bun run start -- list    # run the CLI from source
 ```

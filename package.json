@@ -1,5 +1,5 @@
 {
-  "name": "wtclean-herdr",
+  "name": "wtclean",
   "version": "0.1.0",
   "description": "Find and clean up git worktrees whose pull requests have been merged. CLI, terminal UI and herdr plugin.",
   "keywords": [
@@ -13,13 +13,13 @@
     "tui",
     "worktree"
   ],
-  "homepage": "https://github.com/AdamSiekierski/wtclean-herdr#readme",
-  "bugs": "https://github.com/AdamSiekierski/wtclean-herdr/issues",
+  "homepage": "https://github.com/AdamSiekierski/wtclean#readme",
+  "bugs": "https://github.com/AdamSiekierski/wtclean/issues",
   "license": "MIT",
   "author": "Adam Siekierski",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AdamSiekierski/wtclean-herdr.git"
+    "url": "git+https://github.com/AdamSiekierski/wtclean.git"
   },
   "bin": {
     "wtclean": "bin/wtclean"
